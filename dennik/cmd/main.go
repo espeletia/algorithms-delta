@@ -53,7 +53,7 @@ func displayCommands() {
 
 func main() {
 	mainList = &diary.Diary{}
-	fmt.Printf("Welcome to Dennik! %+v\n", functionList)
+	displayCommands()
 	err := mainList.FromJSON("diary.json")
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
@@ -64,7 +64,6 @@ func main() {
 		fmt.Printf("Number of entries: %v\n", len(mainList.Entries))
 	}
 	for {
-		printStatus()
 		mainList.DisplayCurrentEntry()
 		fmt.Printf("Enter command: ")
 		var command string
@@ -75,13 +74,5 @@ func main() {
 		} else {
 			fmt.Println("Invalid command")
 		}
-	}
-}
-
-func printStatus() {
-	fmt.Printf("Head: %v\n", mainList.Head)
-	if mainList.Head != nil {
-		fmt.Printf("Head.Next: %v\n", mainList.Head.Next)
-		fmt.Printf("Head.Previous: %v\n", mainList.Head.Previous)
 	}
 }

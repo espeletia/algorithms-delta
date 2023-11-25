@@ -2,8 +2,8 @@ package diary
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
-	"log"
 	"time"
 )
 
@@ -91,11 +91,11 @@ func (d *Diary) Delete() {
 
 func (d *Diary) Next() {
 	if d.Head == nil {
-		log.Println("Diary empty")
+		fmt.Println("Diary empty")
 		return
 	}
 	if d.Head.Next == nil {
-		log.Println("There are no more entries")
+		fmt.Println("There are no more entries")
 		return
 	}
 	d.Head = d.Head.Next
@@ -103,21 +103,14 @@ func (d *Diary) Next() {
 
 func (d *Diary) Previous() {
 	if d.Head == nil {
-		log.Println("Diary empty")
+		fmt.Println("Diary empty")
 		return
 	}
 	if d.Head.Previous == nil {
-		log.Println("This is the last entry")
+		fmt.Println("This is the last entry")
 		return
 	}
-
-	// Add a log statement to check the state before updating d.Head
-	log.Printf("Before Previous - Head: %+v, Previous: %+v\n", d.Head, d.Head.Previous)
-
 	d.Head = d.Head.Previous
-
-	// Add a log statement to check the state after updating d.Head
-	log.Printf("After Previous - Head: %+v, Previous: %+v\n", d.Head, d.Head.Previous)
 }
 
 func (d *Diary) ToJSON(filename string) error {
@@ -157,10 +150,10 @@ func (d *Diary) FromJSON(filename string) error {
 
 func (d *Diary) DisplayCurrentEntry() error {
 	if d.Head == nil {
-		log.Println("Diary empty")
+		fmt.Println("Diary empty")
 		return nil
 	}
-	log.Printf("Text Entry: %s\n Date: %s\n", d.Head.Text, d.Head.Time.Format("2006-01-02 15:04:05"))
+	fmt.Printf("Text Entry: %s\n Date: %s\n", d.Head.Text, d.Head.Time.Format("2006-01-02 15:04:05"))
 	return nil
 }
 
